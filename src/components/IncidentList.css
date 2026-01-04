@@ -1,0 +1,127 @@
+.incident-list {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.incident-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.incident-table thead {
+  background: #f5f5f5;
+}
+
+.incident-table th {
+  padding: 1rem;
+  text-align: left;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 2px solid #ddd;
+  font-size: 0.9rem;
+}
+
+.incident-table tbody tr {
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.incident-table tbody tr:hover {
+  background: #f9f9f9;
+}
+
+.incident-table td {
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.incident-title {
+  font-weight: 500;
+  color: #333;
+}
+
+.status-badge,
+.priority-badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  display: inline-block;
+}
+
+.status-open {
+  background: #e3f2fd;
+  color: #1976d2;
+}
+
+.status-in-progress {
+  background: #fff3e0;
+  color: #f57c00;
+}
+
+.status-resolved {
+  background: #e8f5e9;
+  color: #388e3c;
+}
+
+.status-closed {
+  background: #f5f5f5;
+  color: #757575;
+}
+
+.priority-low {
+  background: #e8f5e9;
+  color: #388e3c;
+}
+
+.priority-medium {
+  background: #fff3e0;
+  color: #f57c00;
+}
+
+.priority-high {
+  background: #ffe0b2;
+  color: #e65100;
+}
+
+.priority-critical {
+  background: #ffebee;
+  color: #c62828;
+}
+
+.date-cell {
+  font-size: 0.85rem;
+  color: #777;
+}
+
+.btn-delete {
+  padding: 0.4rem 0.8rem;
+  background: #f44336;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: background 0.3s;
+}
+
+.btn-delete:hover {
+  background: #d32f2f;
+}
+
+.no-incidents {
+  padding: 3rem;
+  text-align: center;
+  color: #999;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.no-incidents p {
+  font-size: 1.1rem;
+}

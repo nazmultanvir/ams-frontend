@@ -1,0 +1,470 @@
+{
+	"info": {
+		"_postman_id": "incident-mgmt-api",
+		"name": "Incident Management API",
+		"description": "API collection for Incident Management System",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Incidents",
+			"item": [
+				{
+					"name": "Get All Incidents",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/incidents",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"incidents"
+							]
+						},
+						"description": "Retrieve all incidents from the database"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Incidents by Status",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/incidents?status=open",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"incidents"
+							],
+							"query": [
+								{
+									"key": "status",
+									"value": "open",
+									"description": "Filter by status: open, in-progress, resolved, closed"
+								}
+							]
+						},
+						"description": "Filter incidents by status"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Incidents by Priority",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/incidents?priority=high",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"incidents"
+							],
+							"query": [
+								{
+									"key": "priority",
+									"value": "high",
+									"description": "Filter by priority: low, medium, high, critical"
+								}
+							]
+						},
+						"description": "Filter incidents by priority level"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Incidents by Assignee",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/incidents?assignedTo=John",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"incidents"
+							],
+							"query": [
+								{
+									"key": "assignedTo",
+									"value": "John",
+									"description": "Filter by assignee name (partial match)"
+								}
+							]
+						},
+						"description": "Filter incidents by assigned person"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Incidents by Category",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/incidents?category=Infrastructure",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"incidents"
+							],
+							"query": [
+								{
+									"key": "category",
+									"value": "Infrastructure",
+									"description": "Filter by category (partial match)"
+								}
+							]
+						},
+						"description": "Filter incidents by category"
+					},
+					"response": []
+				},
+				{
+					"name": "Get Incident by ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/incidents/{{incident_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"incidents",
+								"{{incident_id}}"
+							]
+						},
+						"description": "Retrieve a specific incident by its ID"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Incident - Critical Server Down",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"incident_id\", jsonData.data._id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Production Server Down\",\n  \"description\": \"The main production server is not responding. Users are unable to access the application. This is affecting all users globally.\",\n  \"status\": \"open\",\n  \"priority\": \"critical\",\n  \"category\": \"Infrastructure\",\n  \"assignedTo\": \"John Doe\",\n  \"reportedBy\": \"Jane Smith\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/incidents",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"incidents"
+							]
+						},
+						"description": "Create a new critical incident"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Incident - Database Performance",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"incident_id\", jsonData.data._id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Database Query Performance Issues\",\n  \"description\": \"Queries are taking longer than usual to execute. Average response time has increased from 200ms to 3 seconds.\",\n  \"status\": \"open\",\n  \"priority\": \"high\",\n  \"category\": \"Database\",\n  \"assignedTo\": \"Mike Johnson\",\n  \"reportedBy\": \"System Monitor\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/incidents",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"incidents"
+							]
+						},
+						"description": "Create a high priority database incident"
+					},
+					"response": []
+				},
+				{
+					"name": "Create Incident - User Login Bug",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    var jsonData = pm.response.json();",
+									"    pm.environment.set(\"incident_id\", jsonData.data._id);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"title\": \"Users Unable to Login\",\n  \"description\": \"Multiple users reporting they cannot login to their accounts. Error message: 'Invalid credentials' even with correct password.\",\n  \"status\": \"open\",\n  \"priority\": \"medium\",\n  \"category\": \"Authentication\",\n  \"reportedBy\": \"Support Team\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/incidents",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"incidents"
+							]
+						},
+						"description": "Create a medium priority authentication incident"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Incident - Mark In Progress",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"in-progress\",\n  \"assignedTo\": \"John Doe\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/incidents/{{incident_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"incidents",
+								"{{incident_id}}"
+							]
+						},
+						"description": "Update incident status to in-progress"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Incident - Mark Resolved",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"resolved\",\n  \"description\": \"Production server has been restarted and is now responding normally. Implemented auto-restart script for future incidents.\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/incidents/{{incident_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"incidents",
+								"{{incident_id}}"
+							]
+						},
+						"description": "Update incident status to resolved"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Incident - Change Priority",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"priority\": \"critical\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/incidents/{{incident_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"incidents",
+								"{{incident_id}}"
+							]
+						},
+						"description": "Update incident priority"
+					},
+					"response": []
+				},
+				{
+					"name": "Update Incident - Close",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"status\": \"closed\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/api/incidents/{{incident_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"incidents",
+								"{{incident_id}}"
+							]
+						},
+						"description": "Close an incident"
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Incident",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/api/incidents/{{incident_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"incidents",
+								"{{incident_id}}"
+							]
+						},
+						"description": "Delete an incident by ID"
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Health Check",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{base_url}}/",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						""
+					]
+				},
+				"description": "Check API health and get available endpoints"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:5000",
+			"type": "string"
+		},
+		{
+			"key": "incident_id",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
