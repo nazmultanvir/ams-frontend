@@ -1,26 +1,11 @@
 import React from 'react';
 import { LineChart, Line, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { getCompletionTrendsData, getCategoryDistributionData } from '../services/dataService';
 import './Analytics.css';
 
 function Analytics() {
-  // Sample analytics data for assignment completion over time
-  const completionData = [
-    { month: 'Jan', completed: 12, pending: 8, overdue: 2 },
-    { month: 'Feb', completed: 15, pending: 6, overdue: 1 },
-    { month: 'Mar', completed: 18, pending: 5, overdue: 2 },
-    { month: 'Apr', completed: 20, pending: 4, overdue: 1 },
-    { month: 'May', completed: 22, pending: 6, overdue: 2 },
-    { month: 'Jun', completed: 18, pending: 6, overdue: 2 }
-  ];
-
-  // Sample data for assignment distribution by category
-  const categoryData = [
-    { category: 'Math', count: 8 },
-    { category: 'Science', count: 6 },
-    { category: 'English', count: 5 },
-    { category: 'History', count: 3 },
-    { category: 'Programming', count: 2 }
-  ];
+  const completionData = getCompletionTrendsData();
+  const categoryData = getCategoryDistributionData();
 
   return (
     <div className="analytics">
