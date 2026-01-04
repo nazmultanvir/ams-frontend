@@ -1,0 +1,47 @@
+.dashboard {
+  width: 100%;
+}
+
+.dashboard h2 {
+  margin-top: 0;
+  margin-bottom: 24px;
+  color: #333;
+}
+
+.dashboard-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.dashboard-overview {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.stat-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.stat-card h3 {
+  margin: 0 0 12px 0;
+  font-size: 14px;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-value {
+  margin: 0;
+  font-size: 32px;
+  font-weight: bold;
+  color: #282c34;
+}
+
+.dashboard-analytics {
+  margin-top: 20px;
+}
